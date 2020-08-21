@@ -31,19 +31,21 @@ function listening() {
 }
 
 app.get("/all", function (req, res) {
-    res.send(projectData);
+    res.send(weatherData);
     console.log("Appears to work"); //this can likely be deleted
 });
 
-const data = [];
+const weatherData = [];
 
 app.post("/all", addWeather);
 
 function addWeather(req, res) {
-    projectData = {
-        temperature: req.body.temperature,
+    let newEntry = {
+        temperature: req.body.temp,
         date: req.body.date,
-        userResponse: req.body.userResponse, //not sure on this part
+        userResponse: req.body.content, //not sure on this part
     };
-    res.send(projectData);
+    weatherData.push(newEntry);
+    res.send(weatherData); //likely all but may need from class below
+    console.log(weatherData);
 }
