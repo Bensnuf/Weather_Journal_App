@@ -41,9 +41,9 @@ app.post("/all", addWeather);
 
 function addWeather(req, res) {
     let newEntry = {
-        temperature: req.body.temp,
+        temperature: req.body.temperature.temp,
         date: req.body.date,
-        userResponse: req.body.content, //not sure on this part
+        userResponse: req.body.userResponse, //not sure on this part
     };
     weatherData.push(newEntry);
     res.send(weatherData); //likely all but may need from class below

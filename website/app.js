@@ -43,7 +43,6 @@ const postData = async (url = "http://localhost:8000/all", data = {}) => {
         },
         body: JSON.stringify(data),
     });
-
     try {
         const newerData = await response.json();
         console.log("newerData", newerData);
@@ -58,7 +57,7 @@ const updateUI = async () => {
     try {
         const allData = await request.json();
         console.log("allData: ", allData);
-        document.getElementById("temp").innerHTML = allData[0].temperature;
+        document.getElementById("temp").innerHTML = allData[0].temp;
         document.getElementById("date").innerHTML = allData[0].date;
         document.getElementById("content").innerHTML = allData[0].userResponse;
     } catch (error) {
