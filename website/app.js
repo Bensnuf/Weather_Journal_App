@@ -10,16 +10,14 @@ function performAction(e) {
 
     const howFeeling = document.getElementById("feelings").value;
 
-    getCity(baseURL, zipCode, apiKey)
-        .then(function (data) {
-            console.log("1st data", data);
-            postData("/all", {
-                temperature: data.main,
-                date: newDate,
-                userResponse: howFeeling,
-            });
-        })
-        .then(updateUI());
+    getCity(baseURL, zipCode, apiKey).then(function (data) {
+        console.log("1st data", data);
+        postData("/all", {
+            temperature: data.main,
+            date: newDate,
+            userResponse: howFeeling,
+        }).then(updateUI());
+    });
 }
 
 const getCity = async (baseURL, zip, key) => {
@@ -57,9 +55,12 @@ const updateUI = async () => {
     try {
         const allData = await request.json();
         console.log("allData: ", allData);
-        document.getElementById("temp").innerHTML = allData[0].temp;
-        document.getElementById("date").innerHTML = allData[0].date;
-        document.getElementById("content").innerHTML = allData[0].userResponse;
+        const lastIndex = allData.length - 1;
+        document.getElementById("temp").innerHTML =
+            allData[lastIndex].temperature;
+        document.getElementById("date").innerHTML = allData[lastIndex].date;
+        document.getElementById("content").innerHTML =
+            allData[lastIndex].userResponse;
     } catch (error) {
         console.log("error", error);
     }
