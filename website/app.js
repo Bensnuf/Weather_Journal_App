@@ -16,8 +16,8 @@ function performAction(e) {
             temperature: data.main,
             date: newDate,
             userResponse: howFeeling,
-        }).then(updateUI());
-    });
+        }) .then(updateUI());
+    })
 }
 
 const getCity = async (baseURL, zip, key) => {
@@ -55,12 +55,11 @@ const updateUI = async () => {
     try {
         const allData = await request.json();
         console.log("allData: ", allData);
-        const lastIndex = allData.length - 1;
         document.getElementById("temp").innerHTML =
-            allData[lastIndex].temperature;
-        document.getElementById("date").innerHTML = allData[lastIndex].date;
+            allData.temperature;
+        document.getElementById("date").innerHTML = allData.date;
         document.getElementById("content").innerHTML =
-            allData[lastIndex].userResponse;
+            allData.userResponse;
     } catch (error) {
         console.log("error", error);
     }
